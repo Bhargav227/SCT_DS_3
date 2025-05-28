@@ -1,0 +1,116 @@
+--- All console output will be redirected to 'output_log.txt' ---
+--- Loading dataset from C:\Users\bharg\Downloads\bank+marketing (1)\bank-additional\bank-additional\bank-additional-full.csv ---
+Dataset loaded successfully.
+
+Sample Data Head:
+   age        job  marital  ... euribor3m nr.employed   y
+0   56  housemaid  married  ...     4.857      5191.0  no
+1   57   services  married  ...     4.857      5191.0  no
+2   37   services  married  ...     4.857      5191.0  no
+3   40     admin.  married  ...     4.857      5191.0  no
+4   56   services  married  ...     4.857      5191.0  no
+
+[5 rows x 21 columns]
+
+Data Info:
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 41188 entries, 0 to 41187
+Data columns (total 21 columns):
+ #   Column          Non-Null Count  Dtype  
+---  ------          --------------  -----  
+ 0   age             41188 non-null  int64  
+ 1   job             41188 non-null  object 
+ 2   marital         41188 non-null  object 
+ 3   education       41188 non-null  object 
+ 4   default         41188 non-null  object 
+ 5   housing         41188 non-null  object 
+ 6   loan            41188 non-null  object 
+ 7   contact         41188 non-null  object 
+ 8   month           41188 non-null  object 
+ 9   day_of_week     41188 non-null  object 
+ 10  duration        41188 non-null  int64  
+ 11  campaign        41188 non-null  int64  
+ 12  pdays           41188 non-null  int64  
+ 13  previous        41188 non-null  int64  
+ 14  poutcome        41188 non-null  object 
+ 15  emp.var.rate    41188 non-null  float64
+ 16  cons.price.idx  41188 non-null  float64
+ 17  cons.conf.idx   41188 non-null  float64
+ 18  euribor3m       41188 non-null  float64
+ 19  nr.employed     41188 non-null  float64
+ 20  y               41188 non-null  object 
+dtypes: float64(5), int64(5), object(11)
+memory usage: 6.6+ MB
+
+Target Variable Distribution (before mapping):
+y
+no     36548
+yes     4640
+Name: count, dtype: int64
+
+--- Generating Visualizations ---
+Plot 'y_distribution.png' saved.
+Plot 'job_distribution.png' saved.
+Plot 'job_subscription_rate.png' saved.
+Plot 'education_distribution.png' saved.
+Plot 'education_subscription_rate.png' saved.
+Plot 'marital_distribution.png' saved.
+Visualizations generated and saved as PNG files.
+
+Dropped 'duration' column as per dataset notes.
+
+Categorical columns identified: ['job', 'marital', 'education', 'default', 'housing', 'loan', 'contact', 'month', 'day_of_week', 'poutcome']
+Numerical columns identified: ['age', 'campaign', 'pdays', 'previous', 'emp.var.rate', 'cons.price.idx', 'cons.conf.idx', 'euribor3m', 'nr.employed']
+
+--- Data After One-Hot Encoding and Target Mapping (Head): ---
+   age  campaign  ...  poutcome_nonexistent  poutcome_success
+0   56         1  ...                  True             False
+1   57         1  ...                  True             False
+2   37         1  ...                  True             False
+3   40         1  ...                  True             False
+4   56         1  ...                  True             False
+
+[5 rows x 63 columns]
+
+Target Variable Distribution (after mapping):
+y
+0    36548
+1     4640
+Name: count, dtype: int64
+
+Shape of features (X): (41188, 62)
+Shape of target (y): (41188,)
+
+Training set size: 32950 samples
+Testing set size: 8238 samples
+Proportion of 'yes' in training target: 0.1127
+Proportion of 'yes' in testing target: 0.1126
+
+--- Training Decision Tree Classifier ---
+Decision Tree Classifier trained successfully.
+
+--- Model Evaluation ---
+Accuracy: 0.9025
+Precision: 0.6855
+Recall: 0.2489
+F1-Score: 0.3652
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.91      0.99      0.95      7310
+           1       0.69      0.25      0.37       928
+
+    accuracy                           0.90      8238
+   macro avg       0.80      0.62      0.66      8238
+weighted avg       0.89      0.90      0.88      8238
+
+
+Skipping decision tree visualization.
+To visualize the tree, install 'graphviz' and 'pydotplus' (pip install graphviz pydotplus)
+Also, ensure Graphviz is installed on your system and added to your PATH.
+
+--- Making a Prediction for a New Customer ---
+The new customer is predicted NOT to subscribe to a term deposit.
+Probability of Not Subscribing: 0.9335
+Probability of Subscribing: 0.0665
